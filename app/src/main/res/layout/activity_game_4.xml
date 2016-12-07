@@ -1,0 +1,149 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_game_4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0099cc"
+    tools:context="cit280.randyrecycle.GameActivity4"
+    >
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="false"
+        android:id="@+id/frame_layout">
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            style="?metaButtonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="385dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@color/black_overlay"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent"
+            android:weightSum="1">
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@mipmap/randy_india"
+            android:id="@+id/randy"
+            android:clickable="true"
+            android:adjustViewBounds="true"
+            android:paddingTop="260sp"
+            android:onClick="onTouch"
+            />
+
+        <TextView
+            android:text="Time:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timerText"
+            android:fontFamily="sans-serif"
+            android:textColor="?android:attr/textColorPrimaryInverse"
+            android:textSize="30sp" />
+
+        <TextView
+            android:text="30"
+            android:layout_width="203dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/timerValue"
+            android:fontFamily="sans-serif"
+            android:textSize="30sp"
+            android:textColor="?android:attr/textColorPrimaryInverse"
+            android:layout_gravity="top|left"
+            android:paddingLeft="75dp" />
+
+        <TextView
+            android:text="0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right|top"
+            android:id="@+id/collectedValue"
+            android:textColor="@android:color/holo_green_light"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:text="Points:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right|top"
+            android:id="@+id/collectedText"
+            android:textColor="@android:color/holo_green_light"
+            android:textSize="20sp"
+            android:paddingRight="30dp" />
+
+        <TextView
+            android:text="Health:"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="right"
+            android:id="@+id/healthText"
+            android:paddingLeft="440dp"
+            android:textSize="20sp"
+            android:textColor="@android:color/holo_red_light"
+            android:paddingTop="30dp"
+            android:paddingRight="30dp"/>
+
+        <TextView
+            android:text="5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:id="@+id/healthValue"
+            android:paddingTop="30dp"
+            android:textSize="20sp"
+            android:textColor="@android:color/holo_red_light" />
+
+        <ImageView
+            android:id="@+id/posbottle"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/posbottle"
+            />
+
+        <ImageView
+            android:id="@+id/poscan"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/poscan"
+            />
+
+        <ImageView
+            android:id="@+id/posmilk"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/posmilk"
+            />
+
+        <ImageView
+            android:id="@+id/posmag"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/posmag"
+            />
+
+        <TextView
+            android:text="3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/initalTimer"
+            android:textSize="65sp"
+            android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
+    </FrameLayout>
+
+</FrameLayout>

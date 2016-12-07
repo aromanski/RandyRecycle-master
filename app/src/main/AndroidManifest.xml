@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cit280.randyrecycle">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Randy The Recycler"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".OptionsActivity"
+            android:label="@string/title_activity_options"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cit280.randyrecycle.MainActivity" />
+        </activity>
+        <activity
+            android:name=".LeaderboardActivity"
+            android:label="@string/title_activity_leaderboard"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cit280.randyrecycle.MainActivity" />
+        </activity>
+        <activity
+            android:name=".GameActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_game"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/FullscreenTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cit280.randyrecycle.MainActivity" />
+        </activity>
+        <activity android:name=".GameActivity2">
+            <action android:name="cit280.randyrecycle.GameActivity2" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+        <activity android:name=".GameActivity3">
+            <action android:name="cit280.randyrecycle.GameActivity3" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+        <activity android:name=".GameActivity4">
+            <action android:name="cit280.randyrecycle.GameActivity4" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+        <activity android:name=".GameActivity5">
+            <action android:name="cit280.randyrecycle.GameActivity5" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+        <activity android:name=".factScreen">
+            <action android:name="cit280.randyrecycle." />
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+        <activity android:name=".factScreen2">
+            <action android:name="cit280.randyrecycle.factScreen2" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+        <activity android:name=".factScreen3">
+            <action android:name="cit280.randyrecycle.factScreen3" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+        <activity android:name=".factScreen4">
+            <action android:name="cit280.randyrecycle.factScreen4" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+        <activity android:name=".factScreen5">
+            <action android:name="cit280.randyrecycle.factScreen5" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+
+
+
+
+
+    </application>
+
+</manifest>
