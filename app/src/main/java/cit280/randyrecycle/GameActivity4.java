@@ -70,7 +70,7 @@ public class GameActivity4 extends AppCompatActivity implements View.OnTouchList
     private int posmilkY;
     private int score;
     //starting health value, change for levels Graydon
-    private int health = 60;
+    private int health = 0;
     private TextView collectedValue;
     private TextView healthValue;
     private TextView timerValue;
@@ -83,12 +83,7 @@ public class GameActivity4 extends AppCompatActivity implements View.OnTouchList
     private int milkSpeed;
 
     SoundPool soundPool;// For sound FX
-    int posID = -1;
-    int negID = -1;
-    int dieID = -1;
-    int loseLifeID = -1;
-    int pos2ID = -1;
-    int pos3ID = -1;
+    int hitID = -1;
 
     //flags to start game and see if screen has been touched Aaron
     private boolean action_flg = false;
@@ -191,18 +186,14 @@ public class GameActivity4 extends AppCompatActivity implements View.OnTouchList
                 }
 
                 //Create and start countdown Timer Nick/Aaron
-                new CountDownTimer(7000, 1000) {
+                new CountDownTimer(30000, 1000) {
                     public void onTick(long millisUntilFinished){
                         //update timer on screen
                         timerValue.setText(String.valueOf(millisUntilFinished/1000));
                     }
                     public void onFinish() {
-                        //TODO: Create if statement checking high scores when time runs out
-                        //if (score >= highscore1){
-                        // highscore1 = score;
-                        // highscoreName = playerName;
-                        // }
                         gameSong.stop();
+                        soundPool.release();
                         Intent intent = new Intent(GameActivity4.this, factScreen4.class);
                         //Nick, passes score to fact screen for leaderboard.
                         intent.putExtra("score", Integer.toString(score));
@@ -304,22 +295,12 @@ public class GameActivity4 extends AppCompatActivity implements View.OnTouchList
 
 
 
-        soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);   // Load the sounds
+        soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);   // Load the sounds Sam
         try {
             AssetManager assetManager = this.getAssets();
             AssetFileDescriptor descriptor;
-            descriptor = assetManager.openFd("pos.wav");
-            posID = soundPool.load(descriptor, 0);
-            descriptor = assetManager.openFd("pos2.wav");
-            pos2ID = soundPool.load(descriptor, 0);
-            descriptor = assetManager.openFd("pos3.wav");
-            pos3ID = soundPool.load(descriptor, 0);
-            descriptor = assetManager.openFd("neg.wav");
-            negID = soundPool.load(descriptor, 0);
-            descriptor = assetManager.openFd("lose.wav");
-            loseLifeID = soundPool.load(descriptor, 0);
-            descriptor = assetManager.openFd("die.wav");
-            dieID = soundPool.load(descriptor, 0);
+            descriptor = assetManager.openFd("hit.ogg");
+            hitID = soundPool.load(descriptor, 0);
 
         } catch (IOException e) {
             Log.e("error", "failed to load sound files"); // Print an error message
@@ -375,7 +356,7 @@ public class GameActivity4 extends AppCompatActivity implements View.OnTouchList
         int bottleCenterX = posbottleX + posbottle.getWidth() / 2;
         int bottleCenterY = posbottleY + posbottle.getHeight() / 2;
         if (bottleCenterX >= randyX - randySize && bottleCenterX <= randyX + randySize && randyY - 75 <= bottleCenterY ) {
-            soundPool.play(posID, 1, 1, 0, 0, 1);
+            soundPool.play(hitID, 1, 1, 0, 0, 1); //plays sound effect Sam
             posbottleY = 1200;
             score += 1;
         }
@@ -384,7 +365,7 @@ public class GameActivity4 extends AppCompatActivity implements View.OnTouchList
         int canCenterX = poscanX + poscan.getWidth() / 2;
         int canCenterY = poscanY + poscan.getHeight() / 2;
         if (canCenterX >= randyX - randySize && canCenterX <= randyX + randySize && randyY - 75 <= canCenterY){
-            soundPool.play(pos2ID, 1, 1, 0, 0, 1);
+            soundPool.play(hitID, 1, 1, 0, 0, 1); //plays sound effect Sam
             poscanY = 1200;
             score += 1;
         }
@@ -393,7 +374,7 @@ public class GameActivity4 extends AppCompatActivity implements View.OnTouchList
         int magCenterX = posmagX + posmag.getWidth() / 2;
         int magCenterY = posmagY + posmag.getHeight() / 2;
         if (magCenterX >= randyX - randySize && magCenterX <= randyX + randySize && randyY - 75 <= magCenterY ) {
-            soundPool.play(pos3ID, 1, 1, 0, 0, 1);
+            soundPool.play(hitID, 1, 1, 0, 0, 1); //plays sound effect Sam
             posmagY = 1200;
             score += 1;
         }
@@ -402,7 +383,7 @@ public class GameActivity4 extends AppCompatActivity implements View.OnTouchList
         int milkCenterX = posmilkX + posmilk.getWidth() / 2;
         int milkCenterY = posmilkY + posmilk.getHeight() / 2;
         if (milkCenterX >= randyX - randySize && milkCenterX <= randyX + randySize && randyY - 75 <= milkCenterY ) {
-            soundPool.play(posID, 1, 1, 0, 0, 1);
+            soundPool.play(hitID, 1, 1, 0, 0, 1); //plays sound effect Sam
             posmilkY = 1200;
             score += 1;
         }
@@ -411,34 +392,34 @@ public class GameActivity4 extends AppCompatActivity implements View.OnTouchList
         collectedValue.setText("" + score);
     }
 
-    //once an item passes Randy's Y value and reaches y=490, decrease health by 1
+    //once an item passes Randy's Y value, increase health/misses by 1
     //Graydon
     public void missCheck() {
         //checking for bottle miss
         int bottleCenterY = posbottleY + posbottle.getHeight() / 2;
         if (bottleCenterY >= 1010 && bottleCenterY <= 1080){
-            health = health - 1;
+            health = health + 1;
             posbottleY = 1200;
         }
 
         //checking for can miss
         int canCenterY = poscanY + poscan.getHeight() / 2;
         if (canCenterY >= 1010 && canCenterY <= 1080){
-            health = health - 1;
+            health = health + 1;
             poscanY = 1200;
         }
 
         //checking for magazine miss
         int magCenterY = posmagY + posmag.getHeight() / 2;
         if (magCenterY >= 1010 && magCenterY <= 1080){
-            health = health - 1;
+            health = health + 1;
             posmagY = 1200;
         }
 
         //checking for milk miss
         int milkCenterY = posmilkY + posmilk.getHeight() / 2;
         if (milkCenterY >= 1010 && milkCenterY <= 1080){
-            health = health - 1;
+            health = health + 1;
             posmilkY = 1200;
         }
 
@@ -491,6 +472,12 @@ public class GameActivity4 extends AppCompatActivity implements View.OnTouchList
                 return false;
         }
         return true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        start_flg = false;
     }
 
     @Override

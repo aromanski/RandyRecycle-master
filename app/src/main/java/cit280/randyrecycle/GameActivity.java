@@ -73,7 +73,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     private int posmilkY;
     private int score;
     //starting health value, change for higher levels and difficulty Graydon
-    private int health = 30;
+    private int health = 0;
     private TextView collectedValue;
     private TextView healthValue;
     private TextView timerValue;
@@ -191,19 +191,17 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
                 }
 
                 //Create and start countdown Timer Nick/Aaron
-                new CountDownTimer(7000, 1000) {
+                new CountDownTimer(30000, 1000) {
                     public void onTick(long millisUntilFinished){
                         //update timer on screen
                         timerValue.setText(String.valueOf(millisUntilFinished/1000));
                     }
+                    //onFinish method Graydon/Aaron/Nick
                     public void onFinish() {
-                        //TODO: Create if statement checking high scores when time runs out
-                        //if (score >= highscore1){
-                        // highscore1 = score;
-                        // highscoreName = playerName;
-                        // }
                         gameSong.stop();
+                        soundPool.release();
                         Intent intent = new Intent(GameActivity.this, factScreen.class);
+
                         //Nick, passes score to fact screen for leaderboard.
                         intent.putExtra("score", Integer.toString(score));
                         intent.putExtra("health", Integer.toString(health));
@@ -281,7 +279,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         //timer value for stopping/starting level below
         timerValue = (TextView) findViewById(R.id.timerValue);
 
-        //label textviews for score and health
+        //label textviews for score and health Graydon/Nick
         collectedValue = (TextView) findViewById(R.id.collectedValue);
         healthValue = (TextView) findViewById(R.id.healthValue);
 
@@ -401,34 +399,34 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         collectedValue.setText("" + score);
     }
 
-    //once an item passes Randy's Y value, decrease health by 1
+    //once an item passes Randy's Y value, increase health/misses by 1
     //Graydon
     public void missCheck() {
         //checking for bottle miss
         int bottleCenterY = posbottleY + posbottle.getHeight() / 2;
         if (bottleCenterY >= 1010 && bottleCenterY <= 1080){
-            health = health - 1;
+            health = health + 1;
             posbottleY = 1200;
         }
 
         //checking for can miss
         int canCenterY = poscanY + poscan.getHeight() / 2;
         if (canCenterY >= 1010 && canCenterY <= 1080){
-            health = health - 1;
+            health = health + 1;
             poscanY = 1200;
         }
 
         //checking for magazine miss
         int magCenterY = posmagY + posmag.getHeight() / 2;
         if (magCenterY >= 1010 && magCenterY <= 1080){
-            health = health - 1;
+            health = health + 1;
             posmagY = 1200;
         }
 
         //checking for milk miss
         int milkCenterY = posmilkY + posmilk.getHeight() / 2;
         if (milkCenterY >= 1010 && milkCenterY <= 1080){
-            health = health - 1;
+            health = health + 1;
             posmilkY = 1200;
         }
 
@@ -447,18 +445,16 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
             start_flg = true;
 
         }
-
+            //Nick
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 dX = view.getX() - event.getRawX();
-                //dY = view.getY() - event.getRawY();
                 //monitor randy X position for catching objects, while touching screen
                 randyX = event.getRawX();
                 lastAction = MotionEvent.ACTION_DOWN;
                 break;
 
             case MotionEvent.ACTION_MOVE:
-                //view.setY(event.getRawY() + dY);
                 //monitor randy X position for catching objects, while moving randy on screen
                 randyX = event.getRawX();
                 newX = event.getRawX() + dX;
@@ -466,7 +462,6 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
                     view.setX(newX);
                 }
                 double testx = event.getRawX() + dX;
-                //System.out.println("testX = " + testx);
                 lastAction = MotionEvent.ACTION_MOVE;
                 break;
 
@@ -481,6 +476,12 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
                return false;
         }
         return true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        start_flg = false;
     }
 
     @Override

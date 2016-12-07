@@ -4,7 +4,7 @@
     android:id="@+id/activity_game_5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    android:background="#474A4B"
     tools:context="cit280.randyrecycle.GameActivity5"
     >
 
@@ -86,7 +86,7 @@
             android:paddingRight="30dp" />
 
         <TextView
-            android:text="Health:"
+            android:text="Missed:"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:gravity="right"
@@ -98,7 +98,7 @@
             android:paddingRight="30dp"/>
 
         <TextView
-            android:text="5"
+            android:text="0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
